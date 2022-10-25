@@ -68,13 +68,13 @@
 
         $ bundle 
 
-## API Endpoints
+## API Endpoints (DONE)
 Branch:api-endpoints 
 - As a developer, I can add an index request spec to my application.
 - As a developer, I can add an index endpoint to my application.
 - As a developer, I can add a create request spec to my application.
 - As a developer, I can add a create endpoint to my application.
-### Stretch Goals
+### Stretch Goals (NOT YET COMPLETED)
 - As a developer, I can add an update request spec to my application.
 - As a developer, I can add an update endpoint to my application.
 - As a developer, I can add a destroy request spec to my application.
@@ -82,28 +82,35 @@ Branch:api-endpoints
 
 
 ## API Validations
-
+Branch:api-validations 
 - As a developer, I can add the appropriate model specs that will ensure an incomplete cat throws an error.
-branch:
-
 - As a developer, I can add the appropriate model validations to ensure the user submits a name, an age, what the cat enjoys, and an image.
-branch:
-
+    validates :name, :age,:favorite_song, :pineapple_on_pizza, :enjoys, :image, presence: true
 - As a developer, I can add the appropriate model specs that will ensure a cat enjoys entry is at least 10 characters long.
-branch:
-
 - As a developer, I can add a validation to assure that will ensure a cat enjoys entry is at least 10 characters long.
-branch:
-
+    validates :enjoys, length: {minimum: 10}
 - As a developer, I can add the appropriate request validations to ensure the API is sending useful information to the frontend developer if a new cat is not valid.
-branch:
-
+    ```ruby
+    post '/cats', params: cat_params
+    expect(response.status).to eq 422
+    json = JSON.parse(response.body)
+    expect(json['name']).to include "can't be blank"
+    ```
 - As a developer, I can add the appropriate request spec that will look for a 422 error if the create validations are not met.
-branch:
+    ```ruby 
+        def create
+            cat = Cat.create(cat_params)
+            if cat.valid?
+                render json: cat
+            else 
+                render json: cat.errors, status: 422
+            end 
+        end
+    ```
 
 - STRETCH: As a developer, I can add the appropriate request validations to ensure the API is sending useful information to the frontend developer if an updated cat is not valid.
-branch:
+
 
 - STRETCH: As a developer, I can add the appropriate request spec that will look for a 422 error if the update validations are not met.
-branch:
+
 
