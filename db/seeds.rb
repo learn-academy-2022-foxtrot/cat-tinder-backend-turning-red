@@ -79,13 +79,3 @@ cats.each do |each_cat|
 end
 
 
-
-
-# {
-#     name: ,
-#     age: ,
-#     favorite_song:,
-#     pineapple_on_pizza: ,
-#     enjoys: ,
-#     image: ,
-#     },
